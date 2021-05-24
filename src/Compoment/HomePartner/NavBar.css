@@ -1,0 +1,132 @@
+#logo{
+    width: auto;
+    height: 50px;
+    margin-left: 50px;
+    padding:0px;
+}
+
+.nav-item{
+    display: flex;
+    padding-left:5px;
+    padding-right:5px;
+    font-size: 17px;
+    align-items: center;
+    height: 50px;
+}
+
+#khuyenMai{
+    margin-left: 250px;
+}
+
+#btnDangKy{
+    padding:7px;
+    border-radius: 5px 5px;
+    background-color: #0770cd;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+#btnDangKyNoiNghi{
+    padding:7px;
+    border-radius: 5px 5px;
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    border: none;
+    width: 100%;
+
+   
+}
+#btnDangKyNoiNghi:hover {
+    background-color: gray;
+    color: white;
+
+}
+
+.navBarChinh a{
+    text-decoration: none;
+    color: grey;
+    padding-bottom: 0px;
+}
+
+
+span{
+    padding-right: 5px;
+    color: lightcoral;
+}
+
+.listgroup:hover {
+background: gray;
+}
+
+.text {
+    color:white;
+    position: absolute;
+    top: 300px;
+    left: 325px;
+    right: 325px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+.bodypartner{
+    background-color: rgb(10, 68, 150);
+    padding : 50px 50px;
+}
+
+.container{
+    color: white;
+}
+
+.img1{
+    float: left;
+    padding-right: 25px;
+    padding-bottom: 30px;
+}
+.center{
+   color: white;
+
+  text-align: center;
+
+}
+
+.caption {
+     color:red
+}
+.indo{
+    float: right;
+}
+.div-indo{
+    padding: 5% 20%;
+}
+
+.tera{
+    background-color: rgb(136, 178, 241);
+    padding : 50px 50px;
+}
+.p{
+    color: gray;
+    
+}
+.div-QLTT{
+    padding: 5% 20%;
+    text-align: center;
+}
+.QLTT{
+    float: left
+}
+
+.detail{
+    background-color: rgb(136, 178, 241);
+    padding : 50px 50px;
+}
+.details{
+    background-color: white;
+    border-radius: 10px;
+    border: 20px;
+    
+}
+
+.container1{
+    color: black;
+}
