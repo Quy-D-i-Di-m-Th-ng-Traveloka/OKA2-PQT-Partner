@@ -1,142 +1,166 @@
-import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton'
-import './FormVoucherDetail.css'
-import { DatePicker } from 'material-ui';
-import {List, ListItem} from 'material-ui/List';
-
+import React, { Component } from "react";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import axios from "axios";
+import RaisedButton from "material-ui/RaisedButton";
+import "./FormVoucherDetail.css";
+import { List, ListItem } from "material-ui/List";
+import { Link, Redirect } from "react-router-dom";
 
 export class FormVoucherDetail extends Component {
-    continue = e=> {
-        e.preventDefault();
+  continue = (e) => {
+    e.preventDefault();
+    this.props.nextStep();
+  };
 
-        this.props.nextStep();
-    }
+  back = (e) => {
+    e.preventDefault();
+    this.props.prevStep();
+  };
 
-    back = e=> {
-        e.preventDefault();
-        this.props.prevStep();
-    }
+  render() {
+    const {
+      values: {
+        id,
+        ten,
+        chu_thich_don_gian,
+        chu_thich_day_du,
+        ngay_bat_dau,
+        ngay_ket_thuc,
+        code_voucher,
+        gia_tri,
+        loai_voucher_id,
+        so_luong,
+        trang_thai,
+        hinh_anh,
+        doi_tac_id,
+        diem_toi_thieu,
+        dich_vu_id,
+      },
+    } = this.props;
 
-    render() {
-        const {values :{id,ten,chu_thich_don_gian,chu_thich_day_du,ngay_bat_dau,ngay_ket_thuc,code_voucher,gia_tri,loai_voucher_id,so_luong,trang_thai,hinh_anh,doi_tac_id,diem_toi_thieu}}= this.props;
-     
-        return (
-            <MuiThemeProvider>
-                <React.Fragment>
-                    <br></br>
-                  <h1><center>Xác nhận Voucher</center></h1>
-                  <div className="confirm">                 
-                      <List >
-                          <ListItem primaryText="ID"
-                          secondaryText={id}
-                          />
-                      </List>
-                      <List >
-                          <ListItem primaryText="Tên Voucher"
-                          secondaryText={ten}
-                          />
-                      </List>
-                      <List >
-                          <ListItem primaryText="Chú Thích Đơn Giản"
-                          secondaryText={chu_thich_don_gian}
-                          />
-                      </List>
-                      <List >
-                          <ListItem primaryText="Chú Thích Đầy Đủ"
-                          secondaryText={chu_thich_day_du}
-                          />
-                      </List>
-                      <List >
-                          <ListItem primaryText="Ngày Bắt Đầu"
-                          secondaryText={ngay_bat_dau}
-                          />
-                      </List>
+    const image = this.props.image;
 
-                      <List >
-                          <ListItem primaryText="Ngày Kết Thúc"
-                          secondaryText={ngay_ket_thuc}
-                          />
-                      </List>
+    const compareDateAndPOST = (startDate, endDate) => {
+      if (endDate <= startDate) {
+        window.alert("Ngày hết hạn không được nhỏ hơn ngày bắt đầu");
+      } else {
+        console.log(this.props.values);
+        console.log(image);
 
-                      <List >
-                          <ListItem primaryText="Code Voucher"
-                          secondaryText={code_voucher}
-                          />
-                      </List>
+        var bodyFormData = new FormData();
+        bodyFormData.append("data", JSON.stringify(this.props.values));
+        bodyFormData.append("hinh_anh", image);
 
-                      <List >
-                          <ListItem primaryText="Giá Trị"
-                          secondaryText={gia_tri}
-                          />
-                      </List>
+        axios({
+          method: "post",
+          url: "https://gift-api-v1.herokuapp.com/voucher/add",
+          data: bodyFormData,
+          headers: { "Content-Type": "multipart/form-data" },
+        }).then((res) => {
+          console.log(res.data);
+          if (res.data == "Success") {
+            window.alert("Thêm thành công");
+            return <Redirect to="/" />;
+          } else window.alert("Thêm thất bại");
+        });
+      }
+    };
 
-                      <List >
-                          <ListItem primaryText="Loại Voucher ID"
-                          secondaryText={loai_voucher_id}
-                          />
-                      </List>
+    return (
+      <div id="backGround">
+        <div id="formGift">
+          <MuiThemeProvider>
+            <React.Fragment>
+              <br></br>
+              <h1>
+                <center>
+                  <strong>Xác nhận Voucher</strong>
+                </center>
+              </h1>
+              <div className="confirm">
+                <List>
+                  <ListItem primaryText="Tên Voucher" secondaryText={ten} />
 
-                      <List >
-                          <ListItem primaryText="Số Lượng"
-                          secondaryText={so_luong}
-                          />
-                      </List>
+                  <ListItem
+                    primaryText="Chú Thích Đơn Giản"
+                    secondaryText={chu_thich_don_gian}
+                  />
 
-                      <List >
-                          <ListItem primaryText="Trạng Thái"
-                          secondaryText={trang_thai}
-                          />
-                      </List>
+                  <ListItem
+                    primaryText="Chú Thích Đầy Đủ"
+                    secondaryText={chu_thich_day_du}
+                  />
 
+                  <ListItem
+                    primaryText="Ngày Bắt Đầu"
+                    secondaryText={ngay_bat_dau}
+                  />
 
-                      <List >
-                          <ListItem primaryText="Hình Ảnh"
-                          secondaryText={hinh_anh}
-                          />
-                      </List>
+                  <ListItem
+                    primaryText="Ngày Kết Thúc"
+                    secondaryText={ngay_ket_thuc}
+                  />
 
-                      <List >
-                          <ListItem primaryText="Đối tác ID"
-                          secondaryText={doi_tac_id}
-                          />
-                      </List>
+                  <ListItem
+                    primaryText="Code Voucher"
+                    secondaryText={code_voucher}
+                  />
 
-                      <List >
-                          <ListItem primaryText="Điểm tối thiểu"
-                          secondaryText={diem_toi_thieu}
-                          />
-                      </List>
-                      </div>
+                  <ListItem primaryText="Giá Trị" secondaryText={gia_tri} />
 
-                    <br></br>
-                    <RaisedButton
-                    label="Confirm & Continue"
-                    primary={true}
-                    style={style.button}
-                    onClick={this.continue}
-                    />
-                    &emsp;
-                    <RaisedButton
-                    label="Back"
-                    primary={false}
-                    style={style.button}
-                    onClick={this.back}
-                    />
+                  <ListItem
+                    primaryText="Loại Voucher ID"
+                    secondaryText={loai_voucher_id}
+                  />
 
+                  <ListItem
+                    primaryText="Loại dịch vụ"
+                    secondaryText={dich_vu_id}
+                  />
 
-                </React.Fragment>
-            </MuiThemeProvider>
-        )
-    }
+                  <ListItem primaryText="Số Lượng" secondaryText={so_luong} />
+
+                  <ListItem
+                    primaryText="Trạng Thái"
+                    secondaryText={trang_thai}
+                  />
+
+                  <ListItem primaryText="Hình Ảnh" secondaryText={image.name} />
+
+                  <ListItem
+                    primaryText="Đối tác ID"
+                    secondaryText={doi_tac_id}
+                  />
+
+                  <ListItem
+                    primaryText="Điểm tối thiểu"
+                    secondaryText={diem_toi_thieu}
+                  />
+                </List>
+              </div>
+              <br></br>
+              <RaisedButton
+                label="Xác nhận và tiếp tục"
+                primary={true}
+                onClick={() =>
+                  compareDateAndPOST(
+                    this.props.values.ngay_bat_dau,
+                    this.props.values.ngay_ket_thuc
+                  )
+                }
+              />
+              &emsp;
+              <RaisedButton
+                label="Trở lại"
+                primary={false}
+                onClick={this.back}
+              />
+            </React.Fragment>
+          </MuiThemeProvider>
+        </div>
+      </div>
+    );
+  }
 }
 
-const style={
-    button : {
-        margin:30
-    }
-}
-
-export default FormVoucherDetail
+export default FormVoucherDetail;
