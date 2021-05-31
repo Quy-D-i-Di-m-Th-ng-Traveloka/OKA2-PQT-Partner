@@ -110,14 +110,6 @@ const ShowListVoucher = () => {
             </td>
           </>
         )}
-        <td>
-          <Button
-            variant="danger"
-            onClick={() => handleDelete(listvoucher.id, listvoucher.doi_tac_id)}
-          >
-            Delete
-          </Button>
-        </td>
       </tr>
     );
   };

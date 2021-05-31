@@ -41,7 +41,10 @@ export class FormVoucherDetail extends Component {
     const image = this.props.image;
 
     const compareDateAndPOST = (startDate, endDate) => {
-      if (endDate <= startDate) {
+      let curDate = new Date().toLocaleString();
+      if (startDate < curDate) {
+        window.alert("Ngày bắt đầu không được nhỏ hơn ngày hôm nay");
+      } else if (endDate <= startDate) {
         window.alert("Ngày hết hạn không được nhỏ hơn ngày bắt đầu");
       } else {
         console.log(this.props.values);
