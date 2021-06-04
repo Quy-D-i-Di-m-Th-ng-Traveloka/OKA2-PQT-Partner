@@ -5,6 +5,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import "./FormVoucherDetail.css";
 import { List, ListItem } from "material-ui/List";
 import { Link, Redirect } from "react-router-dom";
+import { isEmptyObject } from "jquery";
 
 export class FormVoucherDetail extends Component {
   continue = (e) => {
@@ -20,7 +21,6 @@ export class FormVoucherDetail extends Component {
   render() {
     const {
       values: {
-        id,
         ten,
         chu_thich_don_gian,
         chu_thich_day_du,
@@ -31,7 +31,6 @@ export class FormVoucherDetail extends Component {
         loai_voucher_id,
         so_luong,
         trang_thai,
-        hinh_anh,
         doi_tac_id,
         diem_toi_thieu,
         dich_vu_id,
@@ -40,20 +39,29 @@ export class FormVoucherDetail extends Component {
 
     const image = this.props.image;
 
+    const checkEmpty = () => {
+      for (const [key, value] of Object.entries(this.props.values)) {
+        console.log(key + " " + value);
+        if (value == "") {
+          return true;
+        }
+      }
+    };
+
     const compareDateAndPOST = (startDate, endDate) => {
-      let curDate = new Date().toLocaleString();
-      if (startDate < curDate) {
+      let curDate = new Date().toISOString().substring(0, 10);
+      if (checkEmpty()) {
+        window.alert("Vui lòng nhập đầy đủ thông tin");
+      } else if (startDate < curDate) {
         window.alert("Ngày bắt đầu không được nhỏ hơn ngày hôm nay");
       } else if (endDate <= startDate) {
         window.alert("Ngày hết hạn không được nhỏ hơn ngày bắt đầu");
       } else {
         console.log(this.props.values);
         console.log(image);
-
         var bodyFormData = new FormData();
         bodyFormData.append("data", JSON.stringify(this.props.values));
         bodyFormData.append("hinh_anh", image);
-
         axios({
           method: "post",
           url: "https://gift-api-v1.herokuapp.com/voucher/add",

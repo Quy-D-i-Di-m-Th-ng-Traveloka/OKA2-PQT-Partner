@@ -2,7 +2,7 @@ import { React, useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import axios from "axios";
 
-const ShowListVoucher = () => {
+const ShowListVoucher = (props) => {
   const [showListVoucher, setShowVoucher] = useState([]);
 
   const handlePublish = async (id, doi_tac_id) => {
@@ -118,7 +118,7 @@ const ShowListVoucher = () => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: "PLANE-1G" }),
+      body: JSON.stringify({ id: props.partnerID.id }),
     };
     fetch("https://gift-api-v1.herokuapp.com/voucher/list", requestOptions)
       .then((res) => res.json())

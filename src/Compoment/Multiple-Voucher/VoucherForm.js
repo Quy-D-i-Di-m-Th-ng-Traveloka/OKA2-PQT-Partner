@@ -8,7 +8,6 @@ import Success from "../Multiple-Voucher/Success";
 export class VoucherForm extends Component {
   state = {
     step: 1,
-    id: "",
     ten: "",
     chu_thich_don_gian: "",
     chu_thich_day_du: "",
@@ -19,9 +18,9 @@ export class VoucherForm extends Component {
     loai_voucher_id: "",
     so_luong: "",
     trang_thai: "UP",
-    hinh_anh: "",
-    doi_tac_id: `PLANE-1G`, //Chỉ để đây để test code //xong r thì thế thành token.id ở PLANE-1G
+    doi_tac_id: `${this.props.partnerID.id}`,
     diem_toi_thieu: "",
+    dich_vu_id: "",
     selectedFile: "",
   };
 
@@ -52,7 +51,6 @@ export class VoucherForm extends Component {
   render() {
     const { step } = this.state;
     const {
-      id,
       ten,
       chu_thich_don_gian,
       chu_thich_day_du,
@@ -63,13 +61,11 @@ export class VoucherForm extends Component {
       loai_voucher_id,
       so_luong,
       trang_thai,
-      hinh_anh,
       doi_tac_id,
       diem_toi_thieu,
       dich_vu_id,
     } = this.state;
     const values = {
-      id,
       ten,
       chu_thich_don_gian,
       chu_thich_day_du,
@@ -80,7 +76,6 @@ export class VoucherForm extends Component {
       loai_voucher_id,
       so_luong,
       trang_thai,
-      hinh_anh,
       doi_tac_id,
       diem_toi_thieu,
       dich_vu_id,

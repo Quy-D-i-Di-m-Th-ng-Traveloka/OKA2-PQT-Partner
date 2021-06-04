@@ -3,16 +3,16 @@ import Footer from "../../Compoment/Footer";
 import ShowListVoucher from "../../Compoment/ShowListVoucher";
 import NavPartner1 from "../../Compoment/NavPartner1";
 
-class PageShowListVoucher extends React.Component {
-  render() {
-    return (
-      <>
-        <NavPartner1 />
-        <ShowListVoucher />
-        <Footer />
-      </>
-    );
-  }
-}
+const PageShowListVoucher = (props) => {
+  const { state } = props.location;
+
+  return (
+    <>
+      <NavPartner1 id={state} />
+      <ShowListVoucher partnerID={state} />
+      <Footer />
+    </>
+  );
+};
 
 export default PageShowListVoucher;
