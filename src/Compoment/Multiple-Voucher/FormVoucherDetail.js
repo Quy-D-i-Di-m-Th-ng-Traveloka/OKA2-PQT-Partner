@@ -63,8 +63,6 @@ export class FormVoucherDetail extends Component {
                 <div className="col-6">Tên Voucher</div>
                 <div className="col-6">
                   <TextField
-                    error
-                    helperText="Incorrect entry."
                     hintText="Enter Voucher's Name"
                     floatingLabelFixed="Voucher's Name"
                     onChange={this.props.handleChange("ten")}

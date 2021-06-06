@@ -5,7 +5,6 @@ import RaisedButton from "material-ui/RaisedButton";
 import "./FormVoucherDetail.css";
 import { List, ListItem } from "material-ui/List";
 import { Link, Redirect } from "react-router-dom";
-import { isEmptyObject } from "jquery";
 
 export class FormVoucherDetail extends Component {
   continue = (e) => {
@@ -19,7 +18,7 @@ export class FormVoucherDetail extends Component {
   };
 
   render() {
-    const {
+    let {
       values: {
         ten,
         chu_thich_don_gian,
@@ -40,6 +39,9 @@ export class FormVoucherDetail extends Component {
     const image = this.props.image;
 
     const checkEmpty = () => {
+      if (this.props.values.diem_toi_thieu == "") {
+        this.props.values.diem_toi_thieu = "0";
+      }
       for (const [key, value] of Object.entries(this.props.values)) {
         console.log(key + " " + value);
         if (value == "") {

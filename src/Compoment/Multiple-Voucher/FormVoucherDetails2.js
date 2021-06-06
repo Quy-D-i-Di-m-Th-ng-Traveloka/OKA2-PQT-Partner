@@ -5,6 +5,19 @@ import RaisedButton from "material-ui/RaisedButton";
 import "./FormVoucherDetail.css";
 
 export class FormVoucherDetails2 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      trangThaiDiem: "true",
+    };
+  }
+
+  componentDidMount = () => {
+    if (this.props.values.loai_voucher_id != "FREE") {
+      this.setState({ trangThaiDiem: "" });
+    }
+  };
+
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
@@ -17,6 +30,8 @@ export class FormVoucherDetails2 extends Component {
 
   render() {
     const { values, handleChange } = this.props;
+
+    console.log(this.state.trangThaiDiem);
 
     return (
       <div id="backGround">
@@ -57,6 +72,7 @@ export class FormVoucherDetails2 extends Component {
                 <div className="col-6">Điểm tối thiểu</div>
                 <div className="col-6">
                   <TextField
+                    disabled={this.state.trangThaiDiem}
                     type="number"
                     hintText="Nhập Điểm tối thiểu"
                     floatingLabelFixed="Điểm tối thiểu"
