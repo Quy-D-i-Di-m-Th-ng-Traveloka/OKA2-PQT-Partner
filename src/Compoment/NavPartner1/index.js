@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const NavPartner1 = (props) => {
   const [navBar, setNavBar] = useState();
+  console.log(props);
 
   useEffect(() => {
     if (props.id == undefined) {
@@ -20,11 +21,21 @@ const NavPartner1 = (props) => {
               </Link>
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link id="khuyenMai">
+              <Link to="/register">
+                <Button>Đăng ký</Button>
+              </Link>
+            </Nav.Link>
+          </Nav.Item>
         </>
       );
     } else {
       setNavBar(
         <>
+          <Nav.Item>
+            <p>Xin chào {props.id.id}</p>
+          </Nav.Item>
           <Nav.Item>
             <Nav.Link>
               <Link to={{ pathname: "/showlistvoucher", state: props.id }}>
